@@ -19,15 +19,7 @@ const Home = () => {
   const perPage = 1;
 
   const fetchNFTs = async () => {
-    try {
-      setLoading(true);
-      setCurrentView(null);
-      const list = await mx.nfts().findAllByOwner(new PublicKey(address));
-      setNftList(list);
-      setCurrentPage(1);
-    } catch (e) {
-      console.error(e);
-    }
+    // add some code here
   };
 
   useEffect(() => {
@@ -35,34 +27,15 @@ const Home = () => {
       return;
     }
 
-    const execute = async () => {
-      const startIndex = (currentPage - 1) * perPage;
-      const endIndex = currentPage * perPage;
-      await loadData(startIndex, endIndex);
-      setCurrentView(nftList.slice(startIndex, endIndex));
-      setLoading(false);
-    };
-    execute();
+    // add some code here
   }, [nftList, currentPage]);
 
   const loadData = async (startIndex, endIndex) => {
-    const nftsToLoad = nftList.filter((nft, index) => {
-      return (
-        index >= startIndex && index < endIndex && nft.metadataTask.isPending()
-      );
-    });
-
-    const promises = nftsToLoad.map((nft) => nft.metadataTask.run());
-    await Promise.all(promises);
+    // add some code here
   };
 
   const changeCurrentPage = (operation) => {
-    setLoading(true);
-    if (operation === 'next') {
-      setCurrentPage((prevValue) => prevValue + 1);
-    } else {
-      setCurrentPage((prevValue) => prevValue - 1);
-    }
+    // add some code here
   };
 
   return (
@@ -110,7 +83,9 @@ const Home = () => {
                 Prev Page
               </button>
               <button
-                disabled={nftList && Math.ceil(nftList.length / perPage) === currentPage}
+                disabled={
+                  nftList && Math.ceil(nftList.length / perPage) === currentPage
+                }
                 className={styles.styledButton}
                 onClick={() => changeCurrentPage('next')}
               >
@@ -122,4 +97,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
